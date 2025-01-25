@@ -30,7 +30,7 @@ export const userSignin = async(req, res)=>{
 
     const user = await User.findOne({email:payload.email})
     if(!user){
-        return res.status(403).json({success:false, message:"No user found with this email"})
+        return res.status(404).json({success:false, message:"No user found with this email"})
     }
 
     const isPassEqual = await bcrypt.compare(payload.password, user.password)
