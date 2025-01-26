@@ -17,7 +17,7 @@ export const userSignup = async(req, res)=>{
 
     const hashedPassword = await bcrypt.hash(payload.password,10)
 
-    const userModel = new User({name: payload.name, email:payload.email, password:hashedPassword})
+    const userModel = new User({name: payload.name, email:payload.email, password:hashedPassword, role:payload.role})
     await userModel.save();
 
     return res.status(201).json({success:true, message:"Signed-up successfully"})
