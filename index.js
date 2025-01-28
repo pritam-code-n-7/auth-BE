@@ -11,10 +11,10 @@ const app = express();
 dbConnect();
 
 // Middlewares
+app.use(cors())
+app.use(helmet());
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(helmet());
-app.use(cors())
 
 // Routes
 app.use('/api/v1',authRoutes)
