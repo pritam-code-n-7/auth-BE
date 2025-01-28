@@ -1,8 +1,9 @@
 import express from "express";
-
+import cors from "cors"
 import dbConnect from "./config/db.connection.js";
 import authRoutes from "./routes/user.route.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
+import helmet from "helmet";
 
 const app = express();
 
@@ -12,6 +13,8 @@ dbConnect();
 // Middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(helmet());
+app.use(cors())
 
 // Routes
 app.use('/api/v1',authRoutes)

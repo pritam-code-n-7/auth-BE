@@ -12,12 +12,12 @@ export const userSignup = async(req, res)=>{
     const user = await User.findOne({email:payload.email})
     if(user)
         {
-            return res.status(409).json({success:false, message:"User already exist, you can login"})
+            return res.status(409).json({ message:"User already exist, you can login",success:false})
         }
 
     const hashedPassword = await bcrypt.hash(payload.password,10)
 
-    const userModel = new User({name: payload.name, email:payload.email, password:hashedPassword, role:payload.role})
+    const userModel = new User({name: payload.name, email:payload.email, password:hashedPassword})
     await userModel.save();
 
     return res.status(201).json({success:true, message:"Signed-up successfully"})
